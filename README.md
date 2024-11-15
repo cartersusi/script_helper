@@ -85,28 +85,27 @@ The package also includes internal functions for color formatting of text:
 package main
 
 import (
-	"github.com/cartersusi/script_helper"
+	sh "github.com/cartersusi/script_helper"
 	"flag"
 )
 
 func main() {
 	longFlag := flag.String("long", "", "long form flag")
 	shortFlag := flag.String("short", "", "short form flag")
-	defaultValue := ""
 
 	flag.Parse()
 
 	// Retrieve the flag value using GetFlag
-	selectedFlag := script_helper.GetFlag(longFlag, shortFlag, defaultValue)
+	selectedFlag := sh.GetFlag(longFlag, shortFlag, "")
 
 	// Log success if a flag is correctly provided
-	script_helper.Success(fmt.Sprintf("Selected flag: %s", selectedFlag))
+	sh.Success(fmt.Sprintf("Selected flag: %s", selectedFlag))
 
 	// Log a warning if something unusual happens
-	script_helper.Warning("This is a warning message.")
+	sh.Warning("This is a warning message.")
 
 	// Log an error and exit
-	script_helper.Error("This is an error message.", true)
+	sh.Error("This is an error message.", true)
 }
 ```
 
