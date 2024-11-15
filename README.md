@@ -19,7 +19,7 @@ A Go package providing utility functions for flag handling and formatted logging
 To install the `script_helper` package, use:
 
 ```bash
-go get path/to/script_helper
+go get github.com/cartersusi/script_helper
 ```
 
 ## Functions
@@ -85,7 +85,7 @@ The package also includes internal functions for color formatting of text:
 package main
 
 import (
-	"script_helper"
+	"github.com/cartersusi/script_helper"
 	"flag"
 )
 
