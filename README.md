@@ -25,7 +25,7 @@ go get github.com/cartersusi/script_helper
 ## Functions
 ### 1. GetFlag
 ```go
-func GetFlag[T string | int | bool](long_flag, short_flag *T, value T, flag_name ...string) T {
+func GetFlag[T string | int | bool](long_flag, short_flag *T, value T, required bool, flag_name ...string) T {
 ```
 The GetFlag function checks the values of the specified long and short flags. It enforces that only one flag should be set, returning the value of the flag that is set.
 
@@ -33,6 +33,7 @@ The GetFlag function checks the values of the specified long and short flags. It
     * long_flag: Pointer to the long-form of the flag.
     * short_flag: Pointer to the short-form of the flag.
     * value: Default value for the flags.
+    * required: Boolean flag to indicate if the flag is required.
     * flag_name: Optional name of the flag to be used in the error message.s
 * Returns: The value of the specified flag (either long_flag or short_flag).
 * Errors: Triggers an error if neither flag is set or if both flags are set.

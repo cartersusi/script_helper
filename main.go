@@ -12,29 +12,38 @@ import (
 //   - long_flag: Pointer to the long-form of the flag.
 //   - short_flag: Pointer to the short-form of the flag.
 //   - value: Default value for the flags.
+//   - required: Boolean flag to indicate if the flag is required.
 //   - flag_name: Optional name of the flag to be used in the error message.s
 //
 // Returns:
 //   - The value of the specified flag (long_flag or short_flag).
-func GetFlag[T string | int | bool](long_flag, short_flag *T, value T, flag_name ...string) T {
+func GetFlag[T string | int | bool](long_flag, short_flag *T, value T, required bool, flag_name ...string) T {
 	flagstr := "flags"
 	if len(flag_name) > 0 {
 		flagstr = flag_name[0]
 	}
 
 	if *long_flag == value && *short_flag == value {
-		Error(fmt.Sprintf("Missing values for %s. Please provide one.", flagstr), true)
+		if required {
+			Error(fmt.Sprintf("Missing values for %s. Please provide one.", flagstr), true)
+		}
 	}
 
 	if *long_flag != value && *short_flag != value {
-		Error(fmt.Sprintf("Both %s are set. Please provide only one.", flagstr), true)
+		if required {
+			Error(fmt.Sprintf("Both %s are set. Please provide only one.", flagstr), true)
+		}
 	}
 
 	if *long_flag != value {
 		return *long_flag
 	}
 
-	return *short_flag
+	if *short_flag != value {
+		return *short_flag
+	}
+
+	return value
 }
 
 // Error logs an error message and optionally exits the program.
